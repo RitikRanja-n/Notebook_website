@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Button } from 'antd';
 import AppButton from '../reusable/AppButton';
 import { motion } from 'framer-motion';
-import { LockOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { LockOutlined, LeftOutlined, RightOutlined, SwapOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 
@@ -102,6 +102,12 @@ export default function ProductsSection() {
           <p style={{ fontSize: 16, color: '#64748B', marginTop: 16, fontWeight: 400 }}>
             {t('products.subtitle')}
           </p>
+          
+          {/* Mobile Swipe Hint */}
+          <div className="md:hidden flex items-center justify-center gap-2 mt-4 text-gray-500 text-sm">
+            <SwapOutlined className="animate-pulse" style={{ fontSize: 16 }} />
+            <span>{t('products.swipe_hint')}</span>
+          </div>
         </div>
 
         {/* Product Slider */}

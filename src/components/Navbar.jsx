@@ -163,21 +163,35 @@ export default function Navbar() {
             </AppButton>
           </div>
 
-          {/* Mobile Menu */}
-          <button
-            className="lg:hidden flex items-center justify-center"
-            style={{
-              width: 40, height: 40,
-              border: '1px solid #E5E7EB',
-              borderRadius: 10,
-              background: '#fff',
-              cursor: 'pointer',
-            }}
-            onClick={() => setDrawerOpen(true)}
-            aria-label="Open menu"
-          >
-            <MenuOutlined style={{ fontSize: 18, color: '#081F5A' }} />
-          </button>
+          {/* Mobile Actions */}
+          <div className="lg:hidden flex items-center gap-2">
+            <button 
+              onClick={toggleLanguage}
+              className="flex items-center justify-center rounded-xl transition-colors duration-200 bg-white hover:bg-gray-50"
+              style={{ width: 40, height: 40, border: '1px solid #E5E7EB', cursor: 'pointer', color: '#081F5A' }}
+              aria-label="Toggle Language"
+            >
+              <GlobalOutlined style={{ fontSize: 16 }} />
+              <span style={{ marginLeft: 3, fontWeight: 600, fontSize: 12 }}>
+                {i18n.language === 'en' ? 'अ' : 'A'}
+              </span>
+            </button>
+
+            <button
+              className="flex items-center justify-center transition-colors duration-200 hover:bg-gray-50"
+              style={{
+                width: 40, height: 40,
+                border: '1px solid #E5E7EB',
+                borderRadius: 10,
+                background: '#fff',
+                cursor: 'pointer',
+              }}
+              onClick={() => setDrawerOpen(true)}
+              aria-label="Open menu"
+            >
+              <MenuOutlined style={{ fontSize: 18, color: '#081F5A' }} />
+            </button>
+          </div>
         </div>
       </header>
 

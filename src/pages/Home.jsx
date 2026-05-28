@@ -5,6 +5,7 @@ import CategoriesSection from '../components/CategoriesSection';
 import ProductsSection from '../components/ProductsSection';
 import WhyChooseSection from '../components/WhyChooseSection';
 import HowItWorksSection from '../components/HowItWorksSection';
+import FAQSection from '../components/FAQSection';
 import ContactSection from '../components/ContactSection';
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <ProductsSection />
       <WhyChooseSection />
       <HowItWorksSection />
+      <FAQSection />
       <ContactSection />
     </div>
   );

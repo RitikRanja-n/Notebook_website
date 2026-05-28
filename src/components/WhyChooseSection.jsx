@@ -25,36 +25,31 @@ export default function WhyChooseSection() {
   const features = [
     {
       id: 'feature-factory',
-      icon: <DeploymentUnitOutlined style={{ fontSize: 24, color: '#2563EB' }} />,
-      iconBg: '#EFF6FF',
+      icon: <DeploymentUnitOutlined style={{ fontSize: 32, color: '#2563EB' }} />,
       title: t('why_choose.direct_factory'),
       desc: t('why_choose.direct_factory_desc'),
     },
     {
       id: 'feature-quality',
-      icon: <SafetyCertificateOutlined style={{ fontSize: 24, color: '#16A34A' }} />,
-      iconBg: '#F0FDF4',
+      icon: <SafetyCertificateOutlined style={{ fontSize: 32, color: '#2563EB' }} />,
       title: t('why_choose.quality_assured'),
       desc: t('why_choose.quality_assured_desc'),
     },
     {
       id: 'feature-delivery',
-      icon: <TruckOutlined style={{ fontSize: 24, color: '#F59E0B' }} />,
-      iconBg: '#FFFBEB',
+      icon: <TruckOutlined style={{ fontSize: 32, color: '#2563EB' }} />,
       title: t('why_choose.fast_delivery'),
       desc: t('why_choose.fast_delivery_desc'),
     },
     {
       id: 'feature-range',
-      icon: <AppstoreOutlined style={{ fontSize: 24, color: '#7C3AED' }} />,
-      iconBg: '#F5F3FF',
+      icon: <AppstoreOutlined style={{ fontSize: 32, color: '#2563EB' }} />,
       title: t('why_choose.wide_range'),
       desc: t('why_choose.wide_range_desc'),
     },
     {
       id: 'feature-support',
-      icon: <PhoneOutlined style={{ fontSize: 24, color: '#2563EB' }} />,
-      iconBg: '#EFF6FF',
+      icon: <PhoneOutlined style={{ fontSize: 32, color: '#2563EB' }} />,
       title: t('why_choose.customer_support'),
       desc: t('why_choose.customer_support_desc'),
     },
@@ -104,30 +99,31 @@ export default function WhyChooseSection() {
               key={feature.id}
               id={feature.id}
               variants={cardVariants}
-              className="flex flex-col items-center text-center gap-4 p-5 rounded-2xl bg-white transition-shadow duration-300 hover:shadow-lg justify-start"
-              style={{ boxShadow: '0 4px 12px rgba(15,23,42,0.06)', borderRadius: 16, minHeight: 180 }}
+              className="flex flex-col items-center text-center gap-4 justify-start"
+              style={{ minHeight: 180 }}
               whileHover={{ y: -4 }}
             >
               <motion.div
-                whileHover={{ rotate: 8, scale: 1.1 }}
+                whileHover={{ rotate: 8, scale: 1.05 }}
                 style={{
-                  width: 48,
-                  height: 48,
+                  width: 72,
+                  height: 72,
                   borderRadius: '50%',
-                  background: feature.iconBg,
+                  background: '#FFFFFF',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+                  boxShadow: '0 8px 24px rgba(37,99,235,0.08)',
+                  marginBottom: 8,
                 }}
               >
                 {feature.icon}
               </motion.div>
               <div>
-                <h3 style={{ fontSize: 14, fontWeight: 700, color: '#0F172A', marginBottom: 6 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0F172A', marginBottom: 8 }}>
                   {feature.title}
                 </h3>
-                <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.5 }}>
+                <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.6 }}>
                   {feature.desc}
                 </p>
               </div>

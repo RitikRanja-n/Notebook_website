@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Button } from 'antd';
 import AppButton from '../reusable/AppButton';
 import { motion } from 'framer-motion';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { LeftOutlined, RightOutlined, SwapOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 const containerVariants = {
@@ -57,6 +57,12 @@ export default function CategoriesSection() {
             {t('categories.title')}
           </motion.h2>
           <div className="section-underline" />
+          
+          {/* Mobile Swipe Hint */}
+          <div className="md:hidden flex items-center justify-center gap-2 mt-4 text-gray-500 text-sm">
+            <SwapOutlined className="animate-pulse" style={{ fontSize: 16 }} />
+            <span>{t('categories.swipe_hint')}</span>
+          </div>
         </div>
 
         {/* Category Slider */}
