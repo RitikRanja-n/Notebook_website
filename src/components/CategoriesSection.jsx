@@ -1,19 +1,9 @@
 import React, { useRef } from 'react';
 import { Button } from 'antd';
+import AppButton from '../reusable/AppButton';
 import { motion } from 'framer-motion';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-
-const categories = [
-  { id: 'cat-notebooks', label: 'Notebooks', emoji: '📚', color: '#EFF6FF' },
-  { id: 'cat-registers', label: 'Registers', emoji: '📖', color: '#F0FDF4' },
-  { id: 'cat-spiral', label: 'Spiral Notebooks', emoji: '🌀', color: '#FFF7ED' },
-  { id: 'cat-diaries', label: 'Diaries', emoji: '📔', color: '#FDF4FF' },
-  { id: 'cat-drawing', label: 'Drawing Books', emoji: '🎨', color: '#FFF1F2' },
-  { id: 'cat-pens', label: 'Pens', emoji: '🖊', color: '#F0FDFA' },
-  { id: 'cat-pencils', label: 'Pencils', emoji: '✏️', color: '#FFFBEB' },
-  { id: 'cat-geometry', label: 'Geometry Boxes', emoji: '📏', color: '#EEF2FF' },
-  { id: 'cat-office', label: 'Office Stationery', emoji: '🏢', color: '#F8FAFC' },
-];
+import { useTranslation } from 'react-i18next';
 
 const containerVariants = {
   hidden: {},
@@ -27,6 +17,19 @@ const cardVariants = {
 
 export default function CategoriesSection() {
   const scrollRef = useRef(null);
+  const { t } = useTranslation();
+
+  const categories = [
+    { id: 'cat-notebooks', label: t('categories.cat_notebooks'), emoji: '📚', color: '#EFF6FF' },
+    { id: 'cat-registers', label: t('categories.cat_registers'), emoji: '📖', color: '#F0FDF4' },
+    { id: 'cat-spiral', label: t('categories.cat_spiral'), emoji: '🌀', color: '#FFF7ED' },
+    { id: 'cat-diaries', label: t('categories.cat_diaries'), emoji: '📔', color: '#FDF4FF' },
+    { id: 'cat-drawing', label: t('categories.cat_drawing'), emoji: '🎨', color: '#FFF1F2' },
+    { id: 'cat-pens', label: t('categories.cat_pens'), emoji: '🖊', color: '#F0FDFA' },
+    { id: 'cat-pencils', label: t('categories.cat_pencils'), emoji: '✏️', color: '#FFFBEB' },
+    { id: 'cat-geometry', label: t('categories.cat_geometry'), emoji: '📏', color: '#EEF2FF' },
+    { id: 'cat-office', label: t('categories.cat_office'), emoji: '🏢', color: '#F8FAFC' },
+  ];
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -38,6 +41,7 @@ export default function CategoriesSection() {
   return (
     <section
       id="categories"
+      className="transition-colors duration-300"
       style={{ padding: '50px 24px 20px', background: '#fff' }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
@@ -50,7 +54,7 @@ export default function CategoriesSection() {
             transition={{ duration: 0.5 }}
             style={{ fontSize: 36, fontWeight: 700, color: '#081F5A', marginBottom: 12 }}
           >
-            Shop By Categories
+            {t('categories.title')}
           </motion.h2>
           <div className="section-underline" />
         </div>
@@ -61,7 +65,7 @@ export default function CategoriesSection() {
             shape="circle"
             icon={<LeftOutlined />}
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center shadow-md bg-white border-none"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center shadow-md border-none bg-white text-gray-900 hover:bg-gray-100"
             style={{ width: 40, height: 40 }}
           />
           
@@ -116,32 +120,21 @@ export default function CategoriesSection() {
             shape="circle"
             icon={<RightOutlined />}
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center shadow-md bg-white border-none"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center shadow-md border-none bg-white text-gray-900 hover:bg-gray-100"
             style={{ width: 40, height: 40 }}
           />
         </div>
 
         {/* View All Button */}
         <div className="flex justify-center">
-          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-            <Button
-              id="view-all-categories-btn"
-              type="primary"
-              size="large"
-              style={{
-                height: 48,
-                paddingInline: 36,
-                fontSize: 15,
-                fontWeight: 600,
-                backgroundColor: '#2563EB',
-                borderColor: '#2563EB',
-                borderRadius: 10,
-                boxShadow: '0 4px 12px rgba(37,99,235,0.20)',
-              }}
-            >
-              View All Categories
-            </Button>
-          </motion.div>
+          <AppButton
+            id="view-all-categories-btn"
+            variant="primary"
+            size="large"
+            onClick={() => {}}
+          >
+            {t('categories.view_all')}
+          </AppButton>
         </div>
       </div>
     </section>

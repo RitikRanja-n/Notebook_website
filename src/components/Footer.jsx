@@ -1,45 +1,10 @@
 import React from 'react';
 import { BookOutlined } from '@ant-design/icons';
 import { useWindowSize } from '../hooks/useWindowSize';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-const footerColumns = [
-  {
-    title: 'Quick Links',
-    links: [
-      { label: 'Home', href: '#home' },
-      { label: 'Products', href: '#products' },
-      { label: 'About Us', href: '#about' },
-      { label: 'Contact Us', href: '#contact' },
-    ],
-  },
-  {
-    title: 'Categories',
-    links: [
-      { label: 'Notebooks', href: '#categories' },
-      { label: 'Registers', href: '#categories' },
-      { label: 'Diaries', href: '#categories' },
-      { label: 'Pens & Pencils', href: '#categories' },
-      { label: 'Office Stationery', href: '#categories' },
-    ],
-  },
-  {
-    title: 'For Retailers',
-    links: [
-      { label: 'Become a Retailer', href: '#contact' },
-      { label: 'Retailer Login', href: '#' },
-      { label: 'How It Works', href: '#' },
-      { label: 'FAQs', href: '#' },
-    ],
-  },
-  {
-    title: 'Policies',
-    links: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms & Conditions', href: '#' },
-      { label: 'Return Policy', href: '#' },
-    ],
-  },
-];
+
 
 const linkStyle = {
   fontSize: 13,
@@ -53,6 +18,68 @@ const linkStyle = {
 
 export default function Footer() {
   const { isMobile, isTablet, isDesktop } = useWindowSize();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useTranslation();
+
+  const footerColumns = [
+    {
+      title: t('footer.quick_links'),
+      links: [
+        { label: t('footer.link_home'), href: '#home' },
+        { label: t('footer.link_products'), href: '#products' },
+        { label: t('footer.link_about'), href: '#about' },
+        { label: t('footer.link_contact'), href: '#contact' },
+      ],
+    },
+    {
+      title: t('footer.categories'),
+      links: [
+        { label: t('footer.link_notebooks'), href: '#categories' },
+        { label: t('footer.link_registers'), href: '#categories' },
+        { label: t('footer.link_diaries'), href: '#categories' },
+        { label: t('footer.link_pens'), href: '#categories' },
+        { label: t('footer.link_office'), href: '#categories' },
+      ],
+    },
+    {
+      title: t('footer.for_retailers'),
+      links: [
+        { label: t('footer.link_become_retailer'), href: '#contact' },
+        { label: t('footer.link_retailer_login'), href: '#' },
+        { label: t('footer.link_how_it_works'), href: '#' },
+        { label: t('footer.link_faqs'), href: '#' },
+      ],
+    },
+    {
+      title: t('footer.policies'),
+      links: [
+        { label: t('footer.link_privacy'), href: '/privacy-policy', isRoute: true },
+        { label: t('footer.link_terms'), href: '/terms-conditions', isRoute: true },
+        { label: t('footer.link_return'), href: '/return-policy', isRoute: true },
+      ],
+    },
+  ];
+
+  const handleFooterLinkClick = (e, href) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const scrollToElement = () => {
+        const el = document.querySelector(href);
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      };
+
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(scrollToElement, 100);
+      } else {
+        scrollToElement();
+      }
+    }
+  };
 
   // Grid columns: desktop = brand + 4 cols, tablet/mobile = 2 cols
   const gridCols = isDesktop
@@ -97,11 +124,11 @@ export default function Footer() {
               <BookOutlined style={{ color: '#fff', fontSize: 18 }} />
             </div>
             <div style={{ lineHeight: 1.2 }}>
-              <div style={{ fontSize: 16, fontWeight: 800, color: '#fff', letterSpacing: '-0.3px' }}>
-                RANJAN
+              <div style={{ fontSize: 16, fontWeight: 800, color: '#fff', letterSpacing: '-0.3px', textTransform: 'uppercase' }}>
+                {t('navbar.brand_name')}
               </div>
-              <div style={{ fontSize: 9, fontWeight: 500, color: 'rgba(255,255,255,0.65)', letterSpacing: '0.6px' }}>
-                NOTEBOOK FACTORY
+              <div style={{ fontSize: 9, fontWeight: 500, color: 'rgba(255,255,255,0.65)', letterSpacing: '0.6px', textTransform: 'uppercase' }}>
+                {t('navbar.brand_subtitle')}
               </div>
             </div>
           </div>
@@ -111,8 +138,7 @@ export default function Footer() {
               lineHeight: 1.65, margin: 0, maxWidth: 240,
             }}
           >
-            Manufacturing and supplying premium notebooks,
-            stationery and office supplies to retailers and wholesalers.
+            {t('footer.desc')}
           </p>
         </div>
 
@@ -128,15 +154,28 @@ export default function Footer() {
               {col.title}
             </h4>
             {col.links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                style={linkStyle}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.72)')}
-              >
-                {link.label}
-              </a>
+              link.isRoute ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  style={linkStyle}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.72)')}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleFooterLinkClick(e, link.href)}
+                  style={linkStyle}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.72)')}
+                >
+                  {link.label}
+                </a>
+              )
             ))}
           </div>
         ))}
@@ -151,7 +190,7 @@ export default function Footer() {
         }}
       >
         <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.50)' }}>
-          © 2024 Ranjan Notebook Factory. All Rights Reserved.
+          {t('footer.copyright', { brand: t('navbar.brand_name') })}
         </span>
       </div>
     </footer>

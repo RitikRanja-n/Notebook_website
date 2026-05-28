@@ -1,70 +1,11 @@
 import React, { useRef } from 'react';
 import { Button } from 'antd';
+import AppButton from '../reusable/AppButton';
 import { motion } from 'framer-motion';
 import { LockOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
-const products = [
-  {
-    id: 'prod-a4-notebook',
-    name: 'A4 Notebook',
-    emoji: '📓',
-    bg: '#EFF6FF',
-    status: 'In Stock',
-    statusColor: '#16A34A',
-    statusBg: '#F0FDF4',
-    moq: 'MOQ: 20 Units',
-  },
-  {
-    id: 'prod-long-register',
-    name: 'Long Register',
-    emoji: '📋',
-    bg: '#FFF1F2',
-    status: 'In Stock',
-    statusColor: '#16A34A',
-    statusBg: '#F0FDF4',
-    moq: 'MOQ: 10 Units',
-  },
-  {
-    id: 'prod-spiral-notebook',
-    name: 'Spiral Notebook',
-    emoji: '🌀',
-    bg: '#FFF7ED',
-    status: 'Low Stock',
-    statusColor: '#F59E0B',
-    statusBg: '#FFFBEB',
-    moq: 'MOQ: 20 Units',
-  },
-  {
-    id: 'prod-premium-diary',
-    name: 'Premium Diary',
-    emoji: '📔',
-    bg: '#F5F3FF',
-    status: 'In Stock',
-    statusColor: '#16A34A',
-    statusBg: '#F0FDF4',
-    moq: 'MOQ: 10 Units',
-  },
-  {
-    id: 'prod-drawing-book',
-    name: 'Drawing Book',
-    emoji: '🎨',
-    bg: '#F0FDF4',
-    status: 'In Stock',
-    statusColor: '#16A34A',
-    statusBg: '#F0FDF4',
-    moq: 'MOQ: 20 Units',
-  },
-  // {
-  //   id: 'prod-ball-pen',
-  //   name: 'Ball Pen (Blue)',
-  //   emoji: '🖊',
-  //   bg: '#EEF2FF',
-  //   status: 'In Stock',
-  //   statusColor: '#16A34A',
-  //   statusBg: '#F0FDF4',
-  //   moq: 'MOQ: 50 Units',
-  // },
-];
+
 
 const containerVariants = {
   hidden: {},
@@ -78,6 +19,60 @@ const cardVariants = {
 
 export default function ProductsSection() {
   const scrollRef = useRef(null);
+  const { t } = useTranslation();
+
+  const products = [
+    {
+      id: 'prod-a4-notebook',
+      name: t('products.prod_a4_notebook'),
+      emoji: '📓',
+      bg: '#EFF6FF',
+      status: t('products.in_stock'),
+      statusColor: '#16A34A',
+      statusBg: '#F0FDF4',
+      moq: t('products.moq', { count: 20 }),
+    },
+    {
+      id: 'prod-long-register',
+      name: t('products.prod_long_register'),
+      emoji: '📋',
+      bg: '#FFF1F2',
+      status: t('products.in_stock'),
+      statusColor: '#16A34A',
+      statusBg: '#F0FDF4',
+      moq: t('products.moq', { count: 10 }),
+    },
+    {
+      id: 'prod-spiral-notebook',
+      name: t('products.prod_spiral_notebook'),
+      emoji: '🌀',
+      bg: '#FFF7ED',
+      status: t('products.low_stock'),
+      statusColor: '#F59E0B',
+      statusBg: '#FFFBEB',
+      moq: t('products.moq', { count: 20 }),
+    },
+    {
+      id: 'prod-premium-diary',
+      name: t('products.prod_premium_diary'),
+      emoji: '📔',
+      bg: '#F5F3FF',
+      status: t('products.in_stock'),
+      statusColor: '#16A34A',
+      statusBg: '#F0FDF4',
+      moq: t('products.moq', { count: 10 }),
+    },
+    {
+      id: 'prod-drawing-book',
+      name: t('products.prod_drawing_book'),
+      emoji: '🎨',
+      bg: '#F0FDF4',
+      status: t('products.in_stock'),
+      statusColor: '#16A34A',
+      statusBg: '#F0FDF4',
+      moq: t('products.moq', { count: 20 }),
+    },
+  ];
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -101,11 +96,11 @@ export default function ProductsSection() {
             transition={{ duration: 0.5 }}
             style={{ fontSize: 36, fontWeight: 700, color: '#081F5A', marginBottom: 12 }}
           >
-            Featured Products
+            {t('products.title')}
           </motion.h2>
           <div className="section-underline" />
           <p style={{ fontSize: 16, color: '#64748B', marginTop: 16, fontWeight: 400 }}>
-            Our bestselling stationery products available for wholesale purchase
+            {t('products.subtitle')}
           </p>
         </div>
 
@@ -200,7 +195,7 @@ export default function ProductsSection() {
                   }}
                 >
                   <LockOutlined style={{ fontSize: 10 }} />
-                  Wholesale Pricing After Login
+                  {t('products.wholesale_pricing')}
                 </div>
 
                 {/* Button */}
@@ -224,7 +219,7 @@ export default function ProductsSection() {
                     e.currentTarget.style.color = '#2563EB';
                   }}
                 >
-                  View Details
+                  {t('products.view_details')}
                 </Button>
               </div>
             </motion.div>
@@ -239,27 +234,16 @@ export default function ProductsSection() {
             style={{ width: 40, height: 40 }}
           />
            {/* View All Button */}
-                  <div className="flex justify-center">
-                    <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-                      <Button
-                        id="view-all-categories-btn"
-                        type="primary"
-                        size="large"
-                        style={{
-                          height: 48,
-                          paddingInline: 36,
-                          fontSize: 15,
-                          fontWeight: 600,
-                          backgroundColor: '#2563EB',
-                          borderColor: '#2563EB',
-                          borderRadius: 10,
-                          boxShadow: '0 4px 12px rgba(37,99,235,0.20)',
-                        }}
-                      >
-                        View All Products
-                      </Button>
-                    </motion.div>
-                  </div>
+           <div className="flex justify-center mt-8">
+             <AppButton
+               id="view-all-products-btn"
+               variant="primary"
+               size="large"
+               onClick={() => {}}
+             >
+               {t('products.view_all')}
+             </AppButton>
+           </div>
         </div>
       </div>
     </section>

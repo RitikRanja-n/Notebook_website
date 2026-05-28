@@ -1,26 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Drawer } from 'antd';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Drawer, Tooltip } from 'antd';
+import AppButton from '../reusable/AppButton';
+import { useTranslation } from 'react-i18next';
 import {
   MenuOutlined,
   CloseOutlined,
   BookOutlined,
   UserOutlined,
   UserAddOutlined,
+  GlobalOutlined,
 } from '@ant-design/icons';
 import { motion } from 'framer-motion';
-
-const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Products', href: '#products' },
-  { label: 'Categories', href: '#categories' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Contact Us', href: '#contact' },
-];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('Home');
+  const [activeLink, setActiveLink] = useState('navbar.home');
+
+  const { t, i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'hi' : 'en';
+    i18n.changeLanguage(newLang);
+  };
+  
+  const navLinks = [
+    { label: t('navbar.home'), key: 'navbar.home', href: '#home' },
+    { label: t('navbar.products'), key: 'navbar.products', href: '#products' },
+    { label: t('navbar.categories'), key: 'navbar.categories', href: '#categories' },
+    { label: t('navbar.about'), key: 'navbar.about', href: '#about' },
+    { label: t('navbar.contact'), key: 'navbar.contact', href: '#contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -28,17 +39,33 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleNavClick = (label, href) => {
     setActiveLink(label);
     setDrawerOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    
+    const scrollToElement = () => {
+      const el = document.querySelector(href);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    };
+
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(scrollToElement, 100);
+    } else {
+      scrollToElement();
+    }
   };
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300"
+        className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 bg-white"
         style={{
           height: 70,
           borderBottom: '1px solid #E5E7EB',
@@ -54,7 +81,7 @@ export default function Navbar() {
             href="#home"
             className="flex items-center gap-3 no-underline"
             whileHover={{ scale: 1.02 }}
-            onClick={(e) => { e.preventDefault(); handleNavClick('Home', '#home'); }}
+            onClick={(e) => { e.preventDefault(); handleNavClick('navbar.home', '#home'); }}
           >
             <div
               className="flex items-center justify-center rounded-xl"
@@ -63,11 +90,16 @@ export default function Navbar() {
               <BookOutlined style={{ color: '#fff', fontSize: 22 }} />
             </div>
             <div className="flex flex-col leading-tight">
-              <span style={{ fontSize: 20, fontWeight: 800, color: '#2563EB', letterSpacing: '-0.5px', lineHeight: 1 }}>
-                RANJAN
+              <span className="multicolor-neon-text" style={{ 
+                fontSize: 24, 
+                fontWeight: 900, 
+                letterSpacing: '-0.5px', 
+                lineHeight: 1,
+              }}>
+                {t('navbar.brand_name')}
               </span>
               <span style={{ fontSize: 10, fontWeight: 500, color: '#081F5A', letterSpacing: '0.5px' }}>
-                NOTEBOOK FACTORY
+                {t('navbar.brand_subtitle')}
               </span>
             </div>
           </motion.a>
@@ -76,64 +108,59 @@ export default function Navbar() {
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
-                key={link.label}
+                key={link.key}
                 href={link.href}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.label, link.href); }}
+                onClick={(e) => { e.preventDefault(); handleNavClick(link.key, link.href); }}
                 className="no-underline transition-colors duration-200 relative group"
                 style={{
                   fontSize: 15,
                   fontWeight: 500,
-                  color: activeLink === link.label ? '#2563EB' : '#081F5A',
+                  color: activeLink === link.key ? '#2563EB' : '#081F5A',
                 }}
               >
                 {link.label}
                 <span
-                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"
+                  className="absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"
                   style={{
                     backgroundColor: '#2563EB',
-                    width: activeLink === link.label ? '100%' : undefined,
+                    width: activeLink === link.key ? '100%' : '0%',
                   }}
                 />
               </a>
             ))}
           </nav>
 
-          {/* Desktop CTA */}
+          {/* Lang Toggle + Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button
-              id="login-btn"
-              size="large"
-              icon={<UserOutlined />}
-              style={{
-                height: 44,
-                paddingInline: 20,
-                borderColor: '#2563EB',
-                color: '#2563EB',
-                fontWeight: 500,
-                borderRadius: 10,
-              }}
-            >
-              Login
-            </Button>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Button
-                id="become-retailer-nav-btn"
-                type="primary"
-                size="large"
-                icon={<UserAddOutlined />}
-                style={{
-                  height: 44,
-                  paddingInline: 20,
-                  backgroundColor: '#2563EB',
-                  borderColor: '#2563EB',
-                  fontWeight: 600,
-                  borderRadius: 10,
-                  boxShadow: '0 4px 12px rgba(37,99,235,0.20)',
-                }}
+            <Tooltip title={i18n.language === 'en' ? t('navbar.change_hindi') : t('navbar.change_english')}>
+              <button 
+                onClick={toggleLanguage}
+                className="flex items-center justify-center rounded-full transition-colors duration-200 hover:bg-gray-100"
+                style={{ width: 40, height: 40, border: 'none', background: 'transparent', cursor: 'pointer', color: '#081F5A' }}
               >
-                Become a Retailer
-              </Button>
-            </motion.div>
+                <GlobalOutlined style={{ fontSize: 20 }} />
+                <span style={{ marginLeft: 4, fontWeight: 600, fontSize: 14 }}>
+                  {i18n.language === 'en' ? 'अ' : 'A'}
+                </span>
+              </button>
+            </Tooltip>
+
+            <AppButton
+              id="login-btn"
+              variant="outline"
+              icon={<UserOutlined />}
+              style={{ height: 44, paddingInline: 20 }}
+            >
+              {t('navbar.login')}
+            </AppButton>
+            <AppButton
+              id="become-retailer-nav-btn"
+              variant="primary"
+              icon={<UserAddOutlined />}
+              style={{ height: 44, paddingInline: 20 }}
+            >
+              {t('navbar.become_retailer')}
+            </AppButton>
           </div>
 
           {/* Mobile Menu */}
@@ -165,7 +192,10 @@ export default function Navbar() {
             <div className="flex items-center justify-center rounded-lg" style={{ width: 32, height: 32, background: '#2563EB' }}>
               <BookOutlined style={{ color: '#fff', fontSize: 16 }} />
             </div>
-            <span style={{ fontWeight: 800, color: '#2563EB', fontSize: 16 }}>RANJAN</span>
+            <span className="multicolor-neon-text" style={{ 
+              fontWeight: 900, 
+              fontSize: 20,
+            }}>{t('navbar.brand_name')}</span>
           </div>
         }
         closeIcon={<CloseOutlined />}
@@ -174,28 +204,28 @@ export default function Navbar() {
         <nav className="flex flex-col">
           {navLinks.map((link) => (
             <a
-              key={link.label}
+              key={link.key}
               href={link.href}
-              onClick={(e) => { e.preventDefault(); handleNavClick(link.label, link.href); }}
+              onClick={(e) => { e.preventDefault(); handleNavClick(link.key, link.href); }}
               className="px-6 py-4 no-underline border-b transition-colors duration-200"
               style={{
                 fontSize: 15,
                 fontWeight: 500,
-                color: activeLink === link.label ? '#2563EB' : '#081F5A',
+                color: activeLink === link.key ? '#2563EB' : '#081F5A',
                 borderColor: '#F1F5F9',
-                backgroundColor: activeLink === link.label ? '#EFF6FF' : 'transparent',
+                backgroundColor: activeLink === link.key ? '#EFF6FF' : 'transparent',
               }}
             >
               {link.label}
             </a>
           ))}
           <div className="flex flex-col gap-3 px-6 pt-6">
-            <Button block size="large" style={{ borderColor: '#2563EB', color: '#2563EB', borderRadius: 10, fontWeight: 500 }}>
-              Login
-            </Button>
-            <Button block type="primary" size="large" style={{ backgroundColor: '#2563EB', borderRadius: 10, fontWeight: 600 }}>
-              Become a Retailer
-            </Button>
+            <AppButton block variant="outline" style={{ height: 44 }}>
+              {t('navbar.login')}
+            </AppButton>
+            <AppButton block variant="primary" style={{ height: 44 }}>
+              {t('navbar.become_retailer')}
+            </AppButton>
           </div>
         </nav>
       </Drawer>

@@ -2,57 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   UserAddOutlined,
-  AuditOutlined,
-  AppstoreOutlined,
+  ScheduleOutlined,
+  ShoppingOutlined,
   ShoppingCartOutlined,
-  FileTextOutlined,
-  CarOutlined,
+  FileTextOutlined ,
+  TruckOutlined,
 } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
-const steps = [
-  {
-    id: 'step-register',
-    number: 1,
-    icon: <UserAddOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
-    title: 'Register',
-    desc: 'Create your retailer account online',
-  },
-  {
-    id: 'step-approval',
-    number: 2,
-    icon: <AuditOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
-    title: 'Account Approval',
-    desc: 'We verify and approve your account',
-  },
-  {
-    id: 'step-browse',
-    number: 3,
-    icon: <AppstoreOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
-    title: 'Browse Products',
-    desc: 'Explore our wide range of products & stationery',
-  },
-  {
-    id: 'step-order',
-    number: 4,
-    icon: <ShoppingCartOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
-    title: 'Place Order',
-    desc: 'Add to cart and place your bulk order',
-  },
-  {
-    id: 'step-invoice',
-    number: 5,
-    icon: <FileTextOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
-    title: 'Receive Invoice',
-    desc: 'Get invoice and order confirmation',
-  },
-  {
-    id: 'step-delivery',
-    number: 6,
-    icon: <CarOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
-    title: 'Delivery',
-    desc: 'We deliver your order safely to your doorstep',
-  },
-];
+
 
 const containerVariants = {
   hidden: {},
@@ -65,6 +23,53 @@ const stepVariants = {
 };
 
 export default function HowItWorksSection() {
+  const { t } = useTranslation();
+
+  const steps = [
+    {
+      id: 'step-register',
+      number: 1,
+      icon: <UserAddOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
+      title: t('how_it_works.register'),
+      desc: t('how_it_works.register_desc'),
+    },
+    {
+      id: 'step-approval',
+      number: 2,
+      icon: <ScheduleOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
+      title: t('how_it_works.approval'),
+      desc: t('how_it_works.approval_desc'),
+    },
+    {
+      id: 'step-browse',
+      number: 3,
+      icon: <ShoppingOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
+      title: t('how_it_works.browse'),
+      desc: t('how_it_works.browse_desc'),
+    },
+    {
+      id: 'step-order',
+      number: 4,
+      icon: <ShoppingCartOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
+      title: t('how_it_works.order'),
+      desc: t('how_it_works.order_desc'),
+    },
+    {
+      id: 'step-invoice',
+      number: 5,
+      icon: <FileTextOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
+      title: t('how_it_works.invoice'),
+      desc: t('how_it_works.invoice_desc'),
+    },
+    {
+      id: 'step-delivery',
+      number: 6,
+      icon: <TruckOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
+      title: t('how_it_works.delivery'),
+      desc: t('how_it_works.delivery_desc'),
+    },
+  ];
+
   return (
     <section
       style={{ padding: '56px 24px', background: '#fff' }}
@@ -79,11 +84,11 @@ export default function HowItWorksSection() {
             transition={{ duration: 0.5 }}
             style={{ fontSize: 36, fontWeight: 700, color: '#081F5A', marginBottom: 12 }}
           >
-            How It Works
+            {t('how_it_works.title')}
           </motion.h2>
           <div className="section-underline" />
           <p style={{ fontSize: 16, color: '#64748B', marginTop: 16 }}>
-            Simple 6-step process to start your wholesale journey with us
+            {t('how_it_works.subtitle')}
           </p>
         </div>
 

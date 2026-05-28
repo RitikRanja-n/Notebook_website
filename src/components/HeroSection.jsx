@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button ,Divider} from 'antd';
+import { Divider } from 'antd';
+import AppButton from '../reusable/AppButton';
+import { useTranslation } from 'react-i18next';
 import {
   SafetyOutlined,
   CarOutlined,
@@ -9,14 +11,6 @@ import {
 } from '@ant-design/icons';
 import { motion } from 'framer-motion';
 import hero1 from "../assets/hero/hero1.png";
-// import hero2 from "../assets/hero/hero2.png";
-// import hero3 from "../assets/hero/hero3.png";
-
-const trustItems = [
-  { icon: <SafetyOutlined style={{ fontSize: 22, color: '#2563EB' }} />, label: 'Quality Products' }  ,
-  { icon: <CarOutlined style={{ fontSize: 22, color: '#2563EB' }} />, label: 'Fast Delivery' },
-  { icon: <CustomerServiceOutlined style={{ fontSize: 22, color: '#2563EB' }} />, label: 'Dedicated Support' },
-];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,6 +28,14 @@ const imgVariants = {
 };
 
 export default function HeroSection() {
+  const { t } = useTranslation();
+
+  const trustItems = [
+    { icon: <SafetyOutlined style={{ fontSize: 22, color: '#2563EB' }} />, label: t('hero.quality_products') },
+    { icon: <CarOutlined style={{ fontSize: 22, color: '#2563EB' }} />, label: t('hero.fast_delivery') },
+    { icon: <CustomerServiceOutlined style={{ fontSize: 22, color: '#2563EB' }} />, label: t('hero.dedicated_support') },
+  ];
+
   const scrollToSection = (href) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -42,6 +44,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
+      className="transition-colors duration-300"
       style={{
         background: '#F1F5FF',
         position: 'relative',
@@ -81,7 +84,7 @@ export default function HeroSection() {
                 display: 'inline-block',
               }}
             >
-              ✦ Manufacturer & Wholesaler
+              {t('hero.badge')}
             </span>
           </motion.div>
 
@@ -97,8 +100,8 @@ export default function HeroSection() {
               whiteSpace: 'nowrap',
             }}
           >
-            Premium Notebooks & <br />{' '}
-            <span style={{ color: '#2563EB' }}>Stationery Products</span>
+            {t('hero.title_part1')} <br />{' '}
+            <span style={{ color: '#2563EB' }}>{t('hero.title_part2')}</span>
           </motion.h1>
 
           {/* Subheading */}
@@ -115,53 +118,29 @@ export default function HeroSection() {
             }}
             className="mx-auto lg:mx-0"
           >
-            High quality notebooks, registers, diaries and stationery items at wholesale prices. Trusted by retailers across India.
+            {t('hero.subtitle')}
           </motion.p>
 
           {/* Buttons */}
           <motion.div variants={itemVariants} className="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-              <Button
-                id="browse-products-btn"
-                type="primary"
-                size="large"
-                icon={<ShoppingOutlined /> }
-                onClick={() => scrollToSection('#products')}
-                style={{
-                  height: 52,
-                  paddingInline: 28,
-                  fontSize: 16,
-                  fontWeight: 600,
-                  backgroundColor: '#2563EB',
-                  borderColor: '#2563EB',
-                  borderRadius: 10,
-                  boxShadow: '0 4px 12px rgba(37,99,235,0.20)',
-                }}
-              >
-                Browse Products
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-              <Button
-                id="become-retailer-hero-btn"
-                size="large"
-                icon={<UserAddOutlined /> }
-                onClick={() => scrollToSection('#contact')}
-                style={{
-                  height: 52,
-                  paddingInline: 28,
-                  fontSize: 16,
-                  fontWeight: 600,
-                  background: '#fff',
-                  borderColor: '#2563EB',
-                  color: '#2563EB',
-                  borderWidth: 1.5,
-                  borderRadius: 10,
-                }}
-              >
-                Become a Retailer
-              </Button>
-            </motion.div>
+            <AppButton
+              id="browse-products-btn"
+              variant="primary"
+              size="large"
+              icon={<ShoppingOutlined />}
+              onClick={() => scrollToSection('#products')}
+            >
+              {t('hero.browse_products')}
+            </AppButton>
+            <AppButton
+              id="become-retailer-hero-btn"
+              variant="outline"
+              size="large"
+              icon={<UserAddOutlined />}
+              onClick={() => scrollToSection('#contact')}
+            >
+              {t('hero.become_retailer')}
+            </AppButton>
           </motion.div>
 
           {/* Trust Indicators */}

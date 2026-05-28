@@ -8,43 +8,10 @@ import {
   TrophyOutlined,
   ShoppingCartOutlined,
 } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { useWindowSize } from '../hooks/useWindowSize';
 
-const stats = [
-  {
-    id: 'stat-products',
-    icon: <InboxOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
-    iconBg: '#EFF6FF',
-    number: '500+',
-    label: 'Products',
-    color: '#2563EB',
-    
-  },
-  {
-    id: 'stat-retailers',
-    icon: <TeamOutlined style={{ fontSize: 28, color: '#16A34A' }} />,
-    iconBg: '#F0FDF4',
-    number: '200+',
-    label: 'Retailers',
-    color: '#16A34A',
-  },
-  {
-    id: 'stat-experience',
-    icon: <TrophyOutlined style={{ fontSize: 28, color: '#F59E0B' }} />,
-    iconBg: '#FFFBEB',
-    number: '8+',
-    label: 'Years Experience',
-    color: '#F59E0B',
-  },
-  {
-    id: 'stat-orders',
-    icon: <ShoppingCartOutlined style={{ fontSize: 28, color: '#7C3AED' }} />,
-    iconBg: '#F5F3FF',
-    number: '50,000+',
-    label: 'Orders Delivered',
-    color: '#7C3AED',
-  },
-];
+
 
 const containerVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -58,6 +25,43 @@ const cardVariants = {
 
 export default function StatsSection() {
   const { isMobile, isTablet } = useWindowSize();
+  const { t } = useTranslation();
+
+  const stats = [
+    {
+      id: 'stat-products',
+      icon: <InboxOutlined style={{ fontSize: 28, color: '#2563EB' }} />,
+      iconBg: '#EFF6FF',
+      number: '500+',
+      label: t('stats.products'),
+      color: '#2563EB',
+      
+    },
+    {
+      id: 'stat-retailers',
+      icon: <TeamOutlined style={{ fontSize: 28, color: '#16A34A' }} />,
+      iconBg: '#F0FDF4',
+      number: '200+',
+      label: t('stats.retailers'),
+      color: '#16A34A',
+    },
+    {
+      id: 'stat-experience',
+      icon: <TrophyOutlined style={{ fontSize: 28, color: '#F59E0B' }} />,
+      iconBg: '#FFFBEB',
+      number: '8+',
+      label: t('stats.years_experience'),
+      color: '#F59E0B',
+    },
+    {
+      id: 'stat-orders',
+      icon: <ShoppingCartOutlined style={{ fontSize: 28, color: '#7C3AED' }} />,
+      iconBg: '#F5F3FF',
+      number: '50,000+',
+      label: t('stats.orders_delivered'),
+      color: '#7C3AED',
+    },
+  ];
 
   return (
     <section

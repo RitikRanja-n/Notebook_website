@@ -1,50 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import {
   DeploymentUnitOutlined,
   SafetyCertificateOutlined,
-  CarOutlined,
+  TruckOutlined,
   AppstoreOutlined,
   PhoneOutlined,
 } from '@ant-design/icons';
-
-const features = [
-  {
-    id: 'feature-factory',
-    icon: <DeploymentUnitOutlined style={{ fontSize: 24, color: '#2563EB' }} />,
-    iconBg: '#EFF6FF',
-    title: 'Direct Factory',
-    desc: 'Direct manufacturing ensures best prices.',
-  },
-  {
-    id: 'feature-quality',
-    icon: <SafetyCertificateOutlined style={{ fontSize: 24, color: '#16A34A' }} />,
-    iconBg: '#F0FDF4',
-    title: 'Quality Assured',
-    desc: 'High quality raw materials used .',
-  },
-  {
-    id: 'feature-delivery',
-    icon: <CarOutlined style={{ fontSize: 24, color: '#F59E0B' }} />,
-    iconBg: '#FFFBEB',
-    title: 'Fast Delivery',
-    desc: 'Timely delivery across the region ',
-  },
-  {
-    id: 'feature-range',
-    icon: <AppstoreOutlined style={{ fontSize: 24, color: '#7C3AED' }} />,
-    iconBg: '#F5F3FF',
-    title: 'Wide Product Range',
-    desc: '500+ products under one roof',
-  },
-  {
-    id: 'feature-support',
-    icon: <PhoneOutlined style={{ fontSize: 24, color: '#2563EB' }} />,
-    iconBg: '#EFF6FF',
-    title: 'Customer Support',
-    desc: 'Dedicated support  for retailers.',
-  },
-];
 
 const containerVariants = {
   hidden: {},
@@ -57,9 +20,50 @@ const cardVariants = {
 };
 
 export default function WhyChooseSection() {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      id: 'feature-factory',
+      icon: <DeploymentUnitOutlined style={{ fontSize: 24, color: '#2563EB' }} />,
+      iconBg: '#EFF6FF',
+      title: t('why_choose.direct_factory'),
+      desc: t('why_choose.direct_factory_desc'),
+    },
+    {
+      id: 'feature-quality',
+      icon: <SafetyCertificateOutlined style={{ fontSize: 24, color: '#16A34A' }} />,
+      iconBg: '#F0FDF4',
+      title: t('why_choose.quality_assured'),
+      desc: t('why_choose.quality_assured_desc'),
+    },
+    {
+      id: 'feature-delivery',
+      icon: <TruckOutlined style={{ fontSize: 24, color: '#F59E0B' }} />,
+      iconBg: '#FFFBEB',
+      title: t('why_choose.fast_delivery'),
+      desc: t('why_choose.fast_delivery_desc'),
+    },
+    {
+      id: 'feature-range',
+      icon: <AppstoreOutlined style={{ fontSize: 24, color: '#7C3AED' }} />,
+      iconBg: '#F5F3FF',
+      title: t('why_choose.wide_range'),
+      desc: t('why_choose.wide_range_desc'),
+    },
+    {
+      id: 'feature-support',
+      icon: <PhoneOutlined style={{ fontSize: 24, color: '#2563EB' }} />,
+      iconBg: '#EFF6FF',
+      title: t('why_choose.customer_support'),
+      desc: t('why_choose.customer_support_desc'),
+    },
+  ];
+
   return (
     <section
       id="about"
+      className="transition-colors duration-300"
       style={{ padding: '56px 24px', background: '#F8FAFC' }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }} className="flex flex-col lg:flex-row items-center gap-6">
@@ -72,7 +76,7 @@ export default function WhyChooseSection() {
             transition={{ duration: 0.5 }}
             style={{ fontSize: 24, fontWeight: 700, color: '#081F5A', marginBottom: 8 }}
           >
-            Why Choose <br /> Ranjan Notebook Factory?
+            {t('why_choose.title')} <br /> {t('navbar.brand_name')} {t('navbar.brand_subtitle')}?
           </motion.h2>
           <div style={{ width: 60, height: 4, background: '#2563EB', borderRadius: 999, marginBottom: 16 }} />
           <motion.p
@@ -82,7 +86,7 @@ export default function WhyChooseSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             style={{ fontSize: 14, color: '#64748B', lineHeight: 1.7, maxWidth: 520 }}
           >
-            We are committed to providing the best quality <br /> products, competitive prices and excellent <br />service to our valuable retailers across India.
+            {t('why_choose.desc')}
           </motion.p>
         </div>
 
