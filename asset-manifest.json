@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/RitikRanja-n/Notebook_website/static/css/main.95aab17c.css",
+    "main.js": "/RitikRanja-n/Notebook_website/static/js/main.0a6aa51b.js",
+    "static/js/453.e130b24d.chunk.js": "/RitikRanja-n/Notebook_website/static/js/453.e130b24d.chunk.js",
+    "static/media/hero1.png": "/RitikRanja-n/Notebook_website/static/media/hero1.6d878d10bc94538d57b7.png",
+    "index.html": "/RitikRanja-n/Notebook_website/index.html",
+    "main.95aab17c.css.map": "/RitikRanja-n/Notebook_website/static/css/main.95aab17c.css.map",
+    "main.0a6aa51b.js.map": "/RitikRanja-n/Notebook_website/static/js/main.0a6aa51b.js.map",
+    "453.e130b24d.chunk.js.map": "/RitikRanja-n/Notebook_website/static/js/453.e130b24d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.95aab17c.css",
+    "static/js/main.0a6aa51b.js"
+  ]
+}
