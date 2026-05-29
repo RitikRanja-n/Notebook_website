@@ -10,19 +10,20 @@ import {
   InstagramOutlined,
 } from '@ant-design/icons';
 import { useWindowSize } from '../hooks/useWindowSize';
+import COMPANY from '../config/company';
 
 const contactItems = [
   {
     id: 'contact-phone',
     icon: <PhoneOutlined style={{ fontSize: 15, color: '#2563EB' }} />,
-    value: '+91 97097 69416',
-    href: 'tel:+919709769416',
+    value: COMPANY.phone,
+    href: `tel:${COMPANY.phone}`,
   },
   {
     id: 'contact-email',
     icon: <MailOutlined style={{ fontSize: 15, color: '#2563EB' }} />,
-    value: 'info@ranjannotebook.com',
-    href: 'mailto:info@ranjannotebook.com',
+    value: COMPANY.email,
+    href: `mailto:${COMPANY.email}`,
   },
   {
     id: 'contact-address',
@@ -42,7 +43,7 @@ const socialLinks = [
     id: 'social-whatsapp',
     icon: <WhatsAppOutlined style={{ fontSize: 18, color: '#fff' }} />,
     bg: '#25D366',
-    href: 'https://wa.me/919709769416',
+    href: `https://wa.me/${COMPANY.whatsapp}`,
     label: 'WhatsApp',
   },
   {

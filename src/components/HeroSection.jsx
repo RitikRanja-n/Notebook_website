@@ -44,9 +44,9 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="transition-colors duration-300"
+      className="transition-colors duration-300 min-h-[100svh] lg:min-h-[650px] flex items-center pt-24 lg:pt-0"
       style={{
-        background: '#F1F5FF',
+        background: 'linear-gradient(135deg, #F8FAFF 0%, #EEF4FF 50%, #EAF2FF 100%)',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -61,8 +61,8 @@ export default function HeroSection() {
       />
 
       <div
-        className="relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-8 px-6 md:px-10"
-        style={{ maxWidth: 1280, margin: '0 auto', paddingTop: 24, paddingBottom: 64 }}
+        className="relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-8 px-6 md:px-10 w-full"
+        style={{ maxWidth: 1280, margin: '0 auto', paddingBottom: 64 }}
       >
         {/* Left Content */}
         <motion.div
@@ -92,16 +92,16 @@ export default function HeroSection() {
           <motion.h1
             variants={itemVariants}
             style={{
-              fontSize: 'clamp(26px, 3.2vw, 42px)',
-              fontWeight: 700,
-              lineHeight: 1.2,
+              fontSize: 'clamp(28px, 7vw, 64px)',
+              fontWeight: 800,
+              lineHeight: 1.125,
               color: '#081F5A',
-              letterSpacing: '-0.5px',
-              whiteSpace: 'nowrap',
+              letterSpacing: '-1px',
             }}
           >
-            {t('hero.title_part1')} <br />{' '}
-            <span style={{ color: '#2563EB' }}>{t('hero.title_part2')}</span>
+            <span style={{ whiteSpace: 'nowrap' }}>{t('hero.title_part1')}</span>
+            <br />
+            <span style={{ color: '#2563EB', whiteSpace: 'nowrap' }}>{t('hero.title_part2')}</span>
           </motion.h1>
 
           {/* Subheading */}
@@ -167,7 +167,20 @@ export default function HeroSection() {
           variants={imgVariants}
           initial="hidden"
           animate="visible"
+          style={{
+            boxShadow: '0 40px 80px rgba(37,99,235,.12)',
+            borderRadius: 24,
+          }}
         >
+          {/* Floating Glow */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: -40,
+              background: 'radial-gradient(circle, rgba(37,99,235,.15), transparent 70%)',
+              zIndex: 0,
+            }}
+          />
           {/* Background blob */}
           <div
             style={{
@@ -175,7 +188,7 @@ export default function HeroSection() {
               inset: 0,
               background: '#EAF2FF',
               borderRadius: 24,
-              zIndex: 0,
+              zIndex: 1,
             }}
           />
           {/* Decorative dots */}
@@ -209,7 +222,7 @@ export default function HeroSection() {
               height: 'auto',
               objectFit: 'contain',
               borderRadius: 24,
-              padding: 20,
+              padding: 10,
             }}
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}

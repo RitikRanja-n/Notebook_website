@@ -51,9 +51,25 @@ body {
   font-family: 'Inter', sans-serif !important;
 }
 
+/* Global Typography */
+.section-title {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.section-subtitle {
+  font-size: 18px;
+  line-height: 30px;
+  color: #64748B;
+}
+.product-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
 /* Category card hover */
 .category-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
   border: 1px solid #E5E7EB;
   background: #ffffff;
   border-radius: 12px;
@@ -63,28 +79,34 @@ body {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   justify-content: center;
 }
 .category-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.05);
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   border-color: #2563EB;
+  background: #2563EB;
+  color: #ffffff;
+}
+.category-card:hover span, .category-card:hover div {
+  color: #ffffff !important;
 }
 
 /* Product card */
 .product-card {
-  width: 210px;
+  width: 260px;
+  height: 340px;
   border-radius: 16px;
   border: 1px solid #E5E7EB;
   background: #ffffff;
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(15,23,42,0.12);
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.10);
 }
 
 /* Step connector */

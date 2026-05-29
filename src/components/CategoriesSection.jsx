@@ -52,7 +52,7 @@ export default function CategoriesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            style={{ fontSize: 36, fontWeight: 700, color: '#081F5A', marginBottom: 12 }}
+            className="section-title text-center text-[#081F5A] mb-3"
           >
             {t('categories.title')}
           </motion.h2>
@@ -95,14 +95,11 @@ export default function CategoriesSection() {
             >
               <div
                 style={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: 12,
-                  background: cat.color,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: 28,
+                  fontSize: 72,
+                  marginBottom: 8,
                 }}
               >
                 {cat.emoji}

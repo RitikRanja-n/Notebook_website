@@ -82,11 +82,12 @@ export default function StatsSection() {
           style={{
             background: '#fff',
             borderRadius: 24,
-            boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
-            padding: '32px 24px',
+            boxShadow: '0 20px 40px rgba(15,23,42,0.08)',
+            padding: '40px 24px',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
             gap: 24,
+            marginTop: '-40px',
           }}
         >
           {stats.map((stat) => (
@@ -96,6 +97,7 @@ export default function StatsSection() {
               variants={cardVariants}
               className="flex flex-col items-center text-center gap-3"
               style={{ minHeight: 120 }}
+              whileHover={{ y: -8 }}
             >
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}

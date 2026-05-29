@@ -84,7 +84,7 @@ export default function ProductsSection() {
   return (
     <section
       id="products"
-      style={{ padding: '56px 24px', background: '#F8FAFF' }}
+      style={{ padding: '56px 24px', background: '#F8FAFC' }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         {/* Section Title */}
@@ -94,12 +94,12 @@ export default function ProductsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            style={{ fontSize: 36, fontWeight: 700, color: '#081F5A', marginBottom: 12 }}
+            className="section-title text-center text-[#081F5A] mb-3"
           >
             {t('products.title')}
           </motion.h2>
           <div className="section-underline" />
-          <p style={{ fontSize: 16, color: '#64748B', marginTop: 16, fontWeight: 400 }}>
+          <p className="section-subtitle text-center mt-4">
             {t('products.subtitle')}
           </p>
           
@@ -133,13 +133,13 @@ export default function ProductsSection() {
               key={product.id}
               id={product.id}
               variants={cardVariants}
-              className="product-card flex-shrink-0 snap-start"
-              style={{ width: 210 }}
+              className="product-card flex-shrink-0 snap-start relative group"
             >
               {/* Product Image Area */}
               <div
+                className="overflow-hidden relative"
                 style={{
-                  height: 140,
+                  height: 160,
                   background: product.bg,
                   display: 'flex',
                   alignItems: 'center',
@@ -148,59 +148,65 @@ export default function ProductsSection() {
                   padding: 20,
                 }}
               >
-                {product.emoji}
+                {/* Ribbon */}
+                {(product.id === 'prod-a4-notebook' || product.id === 'prod-premium-diary') && (
+                  <div className="absolute top-3 left-0 bg-blue-600 text-white text-[11px] font-bold px-3 py-1 rounded-r-full shadow-sm z-10 uppercase tracking-wider">
+                    {product.id === 'prod-a4-notebook' ? 'Best Seller' : 'New Arrival'}
+                  </div>
+                )}
+                <div className="transition-transform duration-300 group-hover:scale-110">
+                  {product.emoji}
+                </div>
               </div>
 
               {/* Product Info */}
-              <div style={{ padding: '14px 16px 16px' }}>
+              <div style={{ padding: '16px', textAlign: 'left', display: 'flex', flexDirection: 'column', height: 'calc(100% - 160px)' }}>
                 <h3
+                  className="product-name"
                   style={{
-                    fontSize: 16,
-                    fontWeight: 600,
                     color: '#0F172A',
-                    marginBottom: 6,
+                    marginBottom: 8,
                     lineHeight: 1.3,
                   }}
                 >
                   {product.name}
                 </h3>
 
-                {/* Status */}
-                <span
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: product.statusColor,
-                    background: product.statusBg,
-                    padding: '2px 8px',
-                    borderRadius: 6,
-                    display: 'inline-block',
-                    marginBottom: 6,
-                  }}
-                >
-                  ● {product.status}
-                </span>
-
-                {/* MOQ */}
-                <div style={{ fontSize: 12, color: '#64748B', marginBottom: 10 }}>
-                  {product.moq}
+                {/* Status & MOQ row */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+                  <span
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: product.statusColor,
+                      background: product.statusBg,
+                      padding: '2px 8px',
+                      borderRadius: 6,
+                      display: 'inline-block',
+                    }}
+                  >
+                    ● {product.status}
+                  </span>
+                  <div style={{ fontSize: 13, color: '#64748B', fontWeight: 500 }}>
+                    {product.moq}
+                  </div>
                 </div>
 
                 {/* Price locked */}
                 <div
                   style={{
-                    fontSize: 11,
+                    fontSize: 12,
                     color: '#64748B',
-                    marginBottom: 10,
-                    background: '#F8FAFC',
+                    marginBottom: 16,
+                    background: '#F1F5F9',
                     borderRadius: 6,
-                    padding: '4px 8px',
+                    padding: '6px 10px',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 4,
+                    gap: 6,
                   }}
                 >
-                  <LockOutlined style={{ fontSize: 10 }} />
+                  <LockOutlined style={{ fontSize: 12 }} />
                   {t('products.wholesale_pricing')}
                 </div>
 
@@ -208,13 +214,14 @@ export default function ProductsSection() {
                 <Button
                   block
                   style={{
-                    height: 40,
+                    height: 44,
                     borderColor: '#2563EB',
                     color: '#2563EB',
                     borderRadius: 8,
-                    fontWeight: 500,
-                    fontSize: 14,
+                    fontWeight: 600,
+                    fontSize: 15,
                     transition: 'all 0.2s',
+                    marginTop: 'auto',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = '#2563EB';

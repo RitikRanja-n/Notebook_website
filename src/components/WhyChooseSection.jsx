@@ -59,7 +59,7 @@ export default function WhyChooseSection() {
     <section
       id="about"
       className="transition-colors duration-300"
-      style={{ padding: '56px 24px', background: '#F8FAFC' }}
+      style={{ padding: '56px 24px', background: 'linear-gradient(180deg, #FFFFFF, #F8FAFC)' }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }} className="flex flex-col lg:flex-row items-center gap-6">
         {/* Left Side */}
@@ -104,10 +104,10 @@ export default function WhyChooseSection() {
               whileHover={{ y: -4 }}
             >
               <motion.div
-                whileHover={{ rotate: 8, scale: 1.05 }}
+                whileHover={{ rotate: 8, scale: 1.05, boxShadow: '0 10px 30px rgba(37,99,235,.15)' }}
                 style={{
-                  width: 72,
-                  height: 72,
+                  width: 80,
+                  height: 80,
                   borderRadius: '50%',
                   background: '#FFFFFF',
                   display: 'flex',

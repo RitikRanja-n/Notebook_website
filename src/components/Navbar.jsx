@@ -65,11 +65,14 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 bg-white"
+        className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300"
         style={{
           height: 70,
-          borderBottom: '1px solid #E5E7EB',
+          borderBottom: '1px solid rgba(229, 231, 235, 0.5)',
           boxShadow: scrolled ? '0 2px 20px rgba(15,23,42,0.08)' : 'none',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          background: 'rgba(255,255,255,0.82)',
         }}
       >
         <div
@@ -91,14 +94,14 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col leading-tight">
               <span className="multicolor-neon-text" style={{ 
-                fontSize: 24, 
-                fontWeight: 900, 
+                fontSize: 34, 
+                fontWeight: 800, 
                 letterSpacing: '-0.5px', 
                 lineHeight: 1,
               }}>
                 {t('navbar.brand_name')}
               </span>
-              <span style={{ fontSize: 10, fontWeight: 500, color: '#081F5A', letterSpacing: '0.5px' }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: '#081F5A', letterSpacing: '1px' }}>
                 {t('navbar.brand_subtitle')}
               </span>
             </div>

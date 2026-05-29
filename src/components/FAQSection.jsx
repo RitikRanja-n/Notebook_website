@@ -2,29 +2,31 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import AppButton from '../reusable/AppButton';
-import { 
-  QuestionCircleOutlined, TagOutlined, InboxOutlined, TruckOutlined, 
-  SyncOutlined, UserAddOutlined, InfoCircleOutlined, CreditCardOutlined, 
+import {
+  QuestionCircleOutlined, TagOutlined, InboxOutlined, TruckOutlined,
+  SyncOutlined, UserAddOutlined, InfoCircleOutlined, CreditCardOutlined,
   FileTextOutlined, ShoppingOutlined, EnvironmentOutlined,
-  DownOutlined, MinusOutlined, PhoneOutlined, WhatsAppOutlined, 
-   MessageOutlined
+  DownOutlined, MinusOutlined, PhoneOutlined, WhatsAppOutlined,
+  MessageOutlined
 } from '@ant-design/icons';
+import COMPANY from "../config/company";
 
 const faqIcons = [
-  <QuestionCircleOutlined />, 
-  <TagOutlined />,            
-  <InboxOutlined />,          
-  <TruckOutlined />,          
-  <SyncOutlined />,           
-  <UserAddOutlined />,        
-  <InfoCircleOutlined />,     
-  <CreditCardOutlined />,     
-  <FileTextOutlined />,       
-  <ShoppingOutlined />,       
-  <EnvironmentOutlined />     
+  <QuestionCircleOutlined />,
+  <TagOutlined />,
+  <InboxOutlined />,
+  <TruckOutlined />,
+  <SyncOutlined />,
+  <UserAddOutlined />,
+  <InfoCircleOutlined />,
+  <CreditCardOutlined />,
+  <FileTextOutlined />,
+  <ShoppingOutlined />,
+  <EnvironmentOutlined />
 ];
 
 const AccordionItem = ({ question, answer, isOpen, onClick, icon }) => {
+  
   return (
     <div className="mb-2 transition-all duration-300">
       <button
@@ -72,7 +74,7 @@ export default function FAQSection() {
   return (
     <section id="faq" className="bg-[#F8FAFC] py-12 px-4 md:px-8 relative overflow-hidden">
       <div className="max-w-4xl mx-auto relative z-10">
-        
+
         {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-block bg-blue-600 text-white text-[11px] uppercase tracking-wider font-bold px-3 py-1 rounded-full mb-3">
@@ -97,7 +99,7 @@ export default function FAQSection() {
         </div>
 
         <div className="max-w-3xl mx-auto mb-10">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -130,13 +132,38 @@ export default function FAQSection() {
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Still have questions?</h3>
-              <p className="text-gray-500 text-sm md:text-[15px] max-w-md">We're happy to help! Reach out to our team and we'll get back to you as soon as possible.</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-2"> {t("faq.stillHaveQuestionsTitle")}</h3>
+              <p className="text-gray-500 text-sm md:text-[15px] max-w-md">  {t("faq.stillHaveQuestionsDescription")}</p>
             </div>
           </div>
           <div className="flex flex-row gap-4 w-full sm:w-auto flex-shrink-0 justify-center">
-            <AppButton variant="primary" icon={<PhoneOutlined />} style={{ height: 44 }}>Contact Us</AppButton>
-            <AppButton variant="outline" icon={<WhatsAppOutlined />} style={{ height: 44, color: '#16a34a', borderColor: '#16a34a' }}>WhatsApp Us</AppButton>
+            <AppButton
+              variant="primary"
+              icon={<PhoneOutlined />}
+              style={{ height: 44 }}
+              onClick={() => {
+                window.location.href = `tel:${COMPANY.phone}`;
+              }}
+            >
+              {t("faq.contactUs")}
+            </AppButton>
+            <AppButton
+              variant="outline"
+              icon={<WhatsAppOutlined />}
+              style={{
+                height: 44,
+                color: '#16a34a',
+                borderColor: '#16a34a'
+              }}
+              onClick={() => {
+                window.open(
+                  `https://wa.me/${COMPANY.whatsapp.replace("+", "")}`,
+                  "_blank"
+                );
+              }}
+            >
+              {t("faq.whatsAppUs")}
+            </AppButton>
           </div>
         </motion.div>
 
